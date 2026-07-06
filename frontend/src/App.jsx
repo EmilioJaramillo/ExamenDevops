@@ -72,7 +72,7 @@ function App() {
       <header className="header">
         <h1>
           <Icon name="warehouse" className="icon-header" />
-          Gestión de Inventarios - Operaciones Logísticas
+          Automatización lograda profesor!!
         </h1>
       </header>
 
