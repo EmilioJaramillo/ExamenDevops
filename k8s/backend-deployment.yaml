@@ -35,10 +35,8 @@ spec:
                 secretKeyRef:
                   name: inventarios-db-secret
                   key: password
-            # Valor temporal: se actualiza con la URL real del frontend
-            # una vez que su LoadBalancer tenga hostname asignado.
             - name: CORS_ALLOWED_ORIGINS
-              value: "http://localhost:5173"
+              value: "http://aa9c1ee6a9fe046229e116fbe9771a7b-757162883.us-east-1.elb.amazonaws.com"
           readinessProbe:
             httpGet:
               path: /actuator/health
