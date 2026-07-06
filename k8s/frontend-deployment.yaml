@@ -20,10 +20,8 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            # PENDIENTE: reemplazar por la URL real del backend-service
-            # una vez que su LoadBalancer tenga hostname asignado.
             - name: API_URL
-              value: "http://PENDIENTE-backend-lb-hostname:8080/api"
+              value: "http://ae3f035b484874bfbb67367e7a85a6ed-444872165.us-east-1.elb.amazonaws.com:8080/api"
           resources:
             requests:
               cpu: "50m"
