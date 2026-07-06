@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { agregarCliente, extraerMensajeError, generarInventario, obtenerHistorial } from './api/inventarioApi'
+import Icon from './components/Icon'
 
 function App() {
   const [clienteId, setClienteId] = useState('')
@@ -69,12 +70,18 @@ function App() {
   return (
     <div className="page">
       <header className="header">
-        <h1>Gestión de Inventarios - Operaciones Logísticas</h1>
+        <h1>
+          <Icon name="warehouse" className="icon-header" />
+          Gestión de Inventarios - Operaciones Logísticas
+        </h1>
       </header>
 
       <main className="content">
         <section className="card">
-          <h2>Registrar Cliente</h2>
+          <h2>
+            <Icon name="person_add" />
+            Registrar Cliente
+          </h2>
           <form className="form-cliente" onSubmit={handleAgregarCliente}>
             <input
               type="number"
@@ -89,30 +96,46 @@ function App() {
               onChange={(e) => setClienteNombre(e.target.value)}
             />
             <button type="submit" disabled={guardandoCliente}>
+              <Icon name={guardandoCliente ? 'progress_activity' : 'add_circle'} className={guardandoCliente ? 'icon-spin' : ''} />
               {guardandoCliente ? 'Agregando...' : 'Agregar Cliente'}
             </button>
           </form>
           {mensajeCliente && (
-            <p className={`mensaje ${mensajeCliente.tipo}`}>{mensajeCliente.texto}</p>
+            <p className={`mensaje ${mensajeCliente.tipo}`}>
+              <Icon name={mensajeCliente.tipo === 'exito' ? 'check_circle' : 'error'} />
+              {mensajeCliente.texto}
+            </p>
           )}
         </section>
 
         <section className="card card-accion">
           <button className="btn-generar" onClick={handleGenerarInventario} disabled={generando}>
+            <Icon name={generando ? 'progress_activity' : 'inventory_2'} className={generando ? 'icon-spin' : ''} />
             {generando ? 'Generando...' : 'Generar Inventario de Hoy'}
           </button>
-          {errorGeneracion && <p className="mensaje error">{errorGeneracion}</p>}
+          {errorGeneracion && (
+            <p className="mensaje error">
+              <Icon name="error" />
+              {errorGeneracion}
+            </p>
+          )}
         </section>
 
         {resultado && (
           <section className="resultados">
             <div className="resultado-tarjeta ciclico">
-              <h3>Cliente Cíclico</h3>
+              <h3>
+                <Icon name="sync" />
+                Cliente Cíclico
+              </h3>
               <p className="resultado-id">ID: {resultado.clienteCiclico.id}</p>
               <p className="resultado-nombre">{resultado.clienteCiclico.nombre}</p>
             </div>
             <div className="resultado-tarjeta aleatorio">
-              <h3>Cliente Aleatorio - Auditoría</h3>
+              <h3>
+                <Icon name="shuffle" />
+                Cliente Aleatorio - Auditoría
+              </h3>
               <p className="resultado-id">ID: {resultado.clienteAleatorio.id}</p>
               <p className="resultado-nombre">{resultado.clienteAleatorio.nombre}</p>
             </div>
@@ -120,9 +143,15 @@ function App() {
         )}
 
         <section className="card">
-          <h2>Historial de Inventarios</h2>
+          <h2>
+            <Icon name="history" />
+            Historial de Inventarios
+          </h2>
           {cargandoHistorial ? (
-            <p>Cargando historial...</p>
+            <p>
+              <Icon name="progress_activity" className="icon-spin" />
+              Cargando historial...
+            </p>
           ) : historial.length === 0 ? (
             <p>Aún no se han generado inventarios.</p>
           ) : (
