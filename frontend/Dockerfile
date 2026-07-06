@@ -9,6 +9,7 @@ RUN npm run build
 # --- Etapa de runtime ---
 FROM nginx:1.27-alpine
 
+RUN apk upgrade --no-cache
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY --from=build /app/public/env-config.template.js /usr/share/nginx/html/env-config.template.js
